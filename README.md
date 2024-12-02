@@ -4,7 +4,7 @@ This challenge is being done as a way of practicing C programming (all solutions
 
 (Might also do in Haskell to practice functional but idk :/ )
 
-Progress will be updated below as the challenge progresses: 
-**Days completed:** 0/25
-    **On time:** 0/25
-**Total stars:** 0/50
+Progress will be updated below as the challenge progresses:\
+**Days completed:** 0/25\
+    **On time:** 0/25\
+**Total stars:** 0/50\
