@@ -1,6 +1,5 @@
-# Ignore compiled C files
-*.out
-*.exe
-*.o
-*.a
-*.so
+*
+!*.c
+!*.h
+!*.md
+!*.txt
