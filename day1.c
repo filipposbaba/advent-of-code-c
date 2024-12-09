@@ -110,7 +110,7 @@ int main(int n, char *args[n]) {
     int index = 0;
     int temp1, temp2; // Not strictly neccessary, but more readable this way
 
-    // While end of the file hasn't been reached
+    // While end of the file hasn't been reached (in hindsight, not sure how this loop works, feof() doesn't work like that...)
     while (!feof(inputFile)) {
         // If able to read two int values from the file (which are stored in the temp variables)..
         if (fscanf(inputFile, "%d   %d", &temp1, &temp2) == 2) {
@@ -120,7 +120,8 @@ int main(int n, char *args[n]) {
             // ..store in our arrays, and increase the index
         }
     }
-
+    fclose(inputFile); // Close file once read
+    
     mergeSort(fileArray1, ARRAY_SIZE);
     mergeSort(fileArray2, ARRAY_SIZE);
 
