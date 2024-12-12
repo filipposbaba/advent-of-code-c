@@ -2,9 +2,19 @@
 #include <stdbool.h>
 
 bool calculateSafety(char* numLine) {
-    bool isSafe = true;
+    int num1, num2;
+    int difference;
+    bool neg = false;
+    char *ptr = numLine; 
+    // while (sscanf(ptr, "%d", &num1) == 1) { 
+    //     printf("%d\n", num1);
+    //     while (*ptr && *ptr != ' ') { ptr++; } 
+    //     if (*ptr) ptr++; 
+    //     }
+    
+    // check out strtok() as well
 
-    return isSafe;
+    return true;
 }
 
 int main(int n, char *args[n]) {
