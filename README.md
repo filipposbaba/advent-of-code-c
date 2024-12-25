@@ -8,6 +8,6 @@ To compile each file, use:\
     clang -std=c11 -Wall -pedantic -g [file].c -o [file] -fsanitize=undefined -fsanitize=address
 
 Progress will be updated below as the challenge progresses:\
+**Days attempted:** 2/25\
 **Days completed:** 1/25\
-    **On time:** 0/25\
-**Total stars:** 2/50
+**Total stars:** 3/50
