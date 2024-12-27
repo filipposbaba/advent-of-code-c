@@ -30,29 +30,52 @@ int findDifferences(char* numLine, int* differences) {
 bool determineSign(int* differences) {
     int product = differences[0] * differences[1];
     if (product == 0) {
-        if (differences[0] == 0) return (differences[1] > 0); else return (differences[0] > 0);
-    } else if (product > 0) return false;
-    else return true;
+        if (differences[0] == 0) return (differences[1] < 0); else return (differences[0] < 0);
+    }
+    else if (product > 0) return (differences[0] < 0);
+    else return (differences[2] < 0);
+    
 }
 
 // Calculates whether a level is safe or not
 bool calculateSafety(int* differences, int numDifferences, bool tolerance) {
     bool neg;
     int i = 0;
-
-    // ISSUE IS UP HERE - YOU'RE SO CLOSE -- USE DETERMINESIGN AND JUST HANDLE THE REST OF THE LOGIC
-    // if the first difference is valid
-    if (abs(differences[0]) >= 1 && abs(differences[0]) <= 3 && (differences[0] * differences[1] > 0)) neg = differences[0] < 0;
-    // if the first difference is invalid, but the second one is valid (i.e. first value should be omitted)
-    else if ((abs(differences[1]) >= 1 && abs(differences[1]) <= 3) || (abs(differences[0] + differences[1]) >= 1 && abs(differences[0] + differences[1]) <= 3)) {
-        if (tolerance) tolerance = false; else return false;
-        neg = (differences[2]) < 0;
-        i = 2;
-    } 
-    // if all above are invalid, then entire level is invalid - return false
-    else return false;
-    
     int diff; // Holds the current difference so that its sign may be safely flipped if necessary
+
+
+    neg = determineSign(differences);
+    printf("neg = %d\n", neg);
+
+    diff = differences[0];
+    if (neg) diff = -diff;
+    if (diff >= 1 && diff <= 3) i = 1; // If valid, start loop from differences[1]
+    else {
+        if (tolerance) tolerance = false; else return false;
+        diff = differences[1];
+        if (neg) diff = -diff;
+
+        if (diff >= 1 && diff <= 3) i = 2; // If this passes, we can skip/tolerate the first level
+        else { // Otherwise, check if we can skip/tolerate the *second* level by adding the first two differences
+            diff = differences[0] + differences[1];
+            if (neg) diff = -diff;
+
+            if (diff >= 1 && diff <= 3) i = 2;
+            else return false;
+        }
+    }
+
+    // // if the first difference is valid
+    // if (abs(differences[0]) >= 1 && abs(differences[0]) <= 3 && (differences[0] * differences[1] > 0)) neg = differences[0] < 0;
+    // // if the first difference is invalid, but the second one is valid (i.e. first value should be omitted)
+    // else if ((abs(differences[1]) >= 1 && abs(differences[1]) <= 3) || (abs(differences[0] + differences[1]) >= 1 && abs(differences[0] + differences[1]) <= 3)) {
+    //     if (tolerance) tolerance = false; else return false;
+    //     neg = (differences[2]) < 0;
+    //     i = 2;
+    // } 
+    // // if all above are invalid, then entire level is invalid - return false
+    // else return false;
+    
     for ( ; i <= numDifferences - 1; i++) {
         diff = differences[i];
         if (neg) diff = -diff;
@@ -102,11 +125,9 @@ int main(int n, char *args[n]) {
         numDifferences = findDifferences(numLine, differences); // Also initializes differences
 
         if (calculateSafety(differences, numDifferences, false)) {
-            printf("%s", numLine);
             safe++;
             tolerantSafe++;
         } else if (calculateSafety(differences, numDifferences, true)) {
-            printf("%s", numLine);
             tolerantSafe++;
         } 
         fgets(numLine, sizeof(numLine), inputFile);
