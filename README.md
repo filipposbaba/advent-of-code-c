@@ -9,5 +9,5 @@ To compile each file, use:\
 
 Progress will be updated below as the challenge progresses:\
 **Days attempted:** 2/25\
-**Days completed:** 1/25\
-**Total stars:** 3/50
+**Days completed:** 2/25\
+**Total stars:** 4/50
